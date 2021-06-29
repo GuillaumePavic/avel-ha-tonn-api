@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "lat": 47.753341,
+        "lng": -3.518707,
+        "label": "Le Loc'h"
+    },
+    {
+        "id": 2,
+        "lat": 47.597138,
+        "lng": -3.156162,
+        "label": "Sainte-Barbe"
+    },
+    {
+        "id": 3,
+        "lat": 47.522001,
+        "lng":  -3.155182,
+        "label": "Port-Blanc"
+    },
+    {
+        "id": 4,
+        "lat": 47.840393,
+        "lng": -4.351886,
+        "label": "La Torche"
+    },
+    {
+        "id": 5,
+        "lat": 48.047262,
+        "lng": -4.710513,
+        "label": "La Baie des Trépassés"
+    },
+    {
+        "id": 6,
+        "lat": 48.210307,
+        "lng": -4.557688,
+        "label": "La Palue"
+    }
+]
