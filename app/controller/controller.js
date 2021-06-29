@@ -20,7 +20,6 @@ exports.getMarkerData = async (req, res) => {
         const data = await generateData(marker.lat, marker.lng);
 
         marker.data = data;
-        console.log(marker)
 
         res.json(marker);
     } catch (error) {

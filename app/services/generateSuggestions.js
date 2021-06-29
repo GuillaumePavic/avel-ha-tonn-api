@@ -17,7 +17,7 @@ function generateSuggestions(sgData) {
     if(waveHeight <= 4 && windSpeed >= 5) suggestions.push("Voile");
 
     //If nothing matches
-    if(suggestions.length === 0) suggestions.push('Pas grand chose à faire à la plage aujourd\'hui !');
+    if(suggestions.length === 0) suggestions.push('Pas grand chose à faire à la plage !');
 
     return suggestions;
 

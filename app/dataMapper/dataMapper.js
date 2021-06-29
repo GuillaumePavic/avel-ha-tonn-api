@@ -15,13 +15,18 @@ exports.fetchStormGlass = async (lat, lng) => {
     
     const params = 'airTemperature,waveHeight,waveDirection,wavePeriod,windDirection,windSpeed,precipitation,waterTemperature,cloudCover';
 
-    const response = await fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}&start=${date}&end=${date}`, {
+    const response = await fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}&start=${date.start}&end=${date.end}`, {
         headers: {
             'Authorization': 'e95591fc-c895-11eb-8d12-0242ac130002-e9559288-c895-11eb-8d12-0242ac130002'
         }
     });
 
     const results = await response.json();
-    return results.hours[0];
+    
+    return {
+        t0: results.hours[0], 
+        t3: results.hours[3], 
+        t6: results.hours[6]
+    };
 };
 
