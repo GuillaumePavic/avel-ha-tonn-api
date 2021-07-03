@@ -1,6 +1,6 @@
 var dayjs = require('dayjs');
 
-module.exports = () => {
+exports.getDate = () => {
     const now = dayjs();
     let start = dayjs(now).format('YYYY-MM-DDTHH:mm');
     start = toSGFormat(start);
@@ -17,4 +17,10 @@ function toSGFormat(date) {
         if(elt === ':') return '%3A';
         return elt;
     }).join('');
+}
+
+
+exports.formatTime = (time) => {
+    //return dayjs(time).format('HH:mm');
+    return time.split('').splice(11, 5).join('');
 }

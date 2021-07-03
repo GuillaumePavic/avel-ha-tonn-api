@@ -9,11 +9,12 @@ const fetchStormGlass = () => {
 let date = moment.now();
 date = moment(date).format();
 }
-
-
-const lat = 47.7537;
-const lng = -3.5175;
-const params = 'waveHeight,airTemperature,airTemperature';
+//48.623035, 1.814428
+const lat = 48.623035;
+const lng = 1.814428;
+//const lat = 47.7537;
+//const lng = -3.5175;
+const params = 'waveHeight,waveDirection,airTemperature';
 
 fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}&start=2021-06-28T14%3A00%3A00%2B00%3A00&end=2021-06-28T20%3A45%3A00%2B00%3A00`, {
   headers: {
@@ -26,3 +27,5 @@ fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=$
   //console.log(jsonData.hours[0].waveHeight);
 })
 .catch(error => console.log(error));
+
+//'2021-06-28T20:00:00+00:00'

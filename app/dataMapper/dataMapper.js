@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const getDate = require('../utils/getDate');
+const { getDate } = require('../utils/getDate');
 const markers = require('../../data/markers.json');
 
 exports.getMarkers = () => {
@@ -22,11 +22,11 @@ exports.fetchStormGlass = async (lat, lng) => {
     });
 
     const results = await response.json();
-    
+
     return {
-        t0: results.hours[0], 
-        t3: results.hours[3], 
-        t6: results.hours[6]
+        hr0: results.hours[0], 
+        hr3: results.hours[3], 
+        hr6: results.hours[6]
     };
 };
 
