@@ -1,4 +1,5 @@
 const generateData = require('../services/generateData');
+const roundLatLng = require('../utils/roundLatLng');
 const dataMapper = require('../dataMapper/dataMapper');
 
 exports.getMarkers = (req, res) => {
@@ -35,8 +36,8 @@ exports.getPointerData = async (req, res) => {
         const data = await generateData(lat, lng);
 
         const marker = {
-            lat,
-            lng,
+            lat: roundLatLng(lat),
+            lng: roundLatLng(lng),
             data
         };
 

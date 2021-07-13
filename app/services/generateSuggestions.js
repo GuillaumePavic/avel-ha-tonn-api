@@ -11,7 +11,7 @@ function generateSuggestions(sgData) {
     if(wvHeight && wvDir && wvPeriod && !windDir) suggestions.push({id: 1, text: "Surf"});
 
     //Beach
-    if(airTemperature >= 18 && waterTemperature >= 17 && precipitation < 5) suggestions.push({id: 2, text: "Plage"});
+    if(airTemperature >= 18 && waterTemperature >= 17 && precipitation === 0) suggestions.push({id: 2, text: "Plage"});
     
     //Sail
     if(waveHeight <= 4 && windSpeed >= 5) suggestions.push({id: 3, text: "Voile"});

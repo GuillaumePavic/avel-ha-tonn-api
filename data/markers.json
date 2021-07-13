@@ -34,5 +34,17 @@
         "lat": 48.210307,
         "lng": -4.557688,
         "label": "La Palue"
+    },
+    {
+        "id": 7,
+        "lat": 48.371137,
+        "lng": -4.769078,
+        "label": "Les Blancs Sablons"
+    },
+    {
+        "id": 8,
+        "lat": 47.326086,
+        "lng": -3.238701,
+        "label": "Le Donnant"
     }
 ]
