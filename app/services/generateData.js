@@ -1,7 +1,6 @@
 const dataMapper = require('../dataMapper/dataMapper');
 const calculAverage = require('../utils/calculAverage');
 const generateSuggestions = require('./generateSuggestions');
-const formateData = require('../utils/formateData');
 const { formatTime } = require('../utils/getDate');
 
 
