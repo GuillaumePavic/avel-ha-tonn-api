@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { getDate } = require('../utils/getDate');
+const { getDate } = require('../utils/date');
 const markers = require('../../data/markers.json');
 
 exports.getMarkers = () => {
@@ -17,7 +17,7 @@ exports.fetchStormGlass = async (lat, lng) => {
 
     const response = await fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}&start=${date.start}&end=${date.end}`, {
         headers: {
-            'Authorization': 'e95591fc-c895-11eb-8d12-0242ac130002-e9559288-c895-11eb-8d12-0242ac130002'
+            'Authorization': `${process.env.API_KEY}`
         }
     });
 

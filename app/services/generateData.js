@@ -1,7 +1,7 @@
 const dataMapper = require('../dataMapper/dataMapper');
 const calculAverage = require('../utils/calculAverage');
 const generateSuggestions = require('./generateSuggestions');
-const { formatTime } = require('../utils/getDate');
+const { formatTime } = require('../utils/date');
 
 
 async function generateData(lat, lng) {
