@@ -29,7 +29,7 @@ exports.getMarkerData = async (req, res) => {
     }
 }
 
-exports.getPointerData = async (req, res) => {
+exports.searchData = async (req, res) => {
     try {
         const {lat, lng} = req.body;
 
