@@ -1,6 +1,6 @@
 function generateSuggestions(sgData) {
-    const { airTemperature, precipitation, waterTemperature, waveDirection, waveHeight, wavePeriod, windDirection, windSpeed } = sgData;
-    
+    const { airTemperature, waterTemperature, waveDirection, waveHeight, wavePeriod, windDirection, windSpeed } = sgData;
+    let { precipitation } = sgData;
     const suggestions = [];
 
     //Surf
@@ -11,7 +11,11 @@ function generateSuggestions(sgData) {
     if(wvHeight && wvDir && wvPeriod && !windDir) suggestions.push({id: 1, text: "Surf"});
 
     //Beach
-    if(airTemperature >= 18 && waterTemperature >= 17 && precipitation === 0) suggestions.push({id: 2, text: "Plage"});
+    if(airTemperature >= 18 && waterTemperature >= 17 && !precipitation) {
+        suggestions.push({id: 2, text: "Plage"})
+        //sometimes Stormglass doesn't provide data for precipitation, therefore =>
+        precipitation = 0;
+    };
     
     //Sail
     if(waveHeight <= 4 && windSpeed >= 5) suggestions.push({id: 3, text: "Voile"});
