@@ -4,11 +4,11 @@ Avel Ha Tonn, Vent et Vague en breton, est une petite application permettant de 
 
 Les données météo sont fournies par l'API Storm Glass, qui permet d'obtenir les conditions météo à n'importes quelles coordonnées du globe. Ces données sont ensuite formatées et les moyennes calculées sur l'API de l'application, elle-même réalisée avec Node.js/Express, et renvoyées au front.
 
-## Tech Stack
+## Stack Technique
 
-**Server:** Node, Express
+ Node.JS, Express, node-fetch
 
-**Client:** React, Sass
+## Demo
 
 Le lien vers l'application => https://avelhatonn.herokuapp.com/
 
