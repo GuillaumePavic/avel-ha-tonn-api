@@ -1,6 +1,6 @@
 function generateSuggestions(sgData) {
     const { airTemperature, waterTemperature, waveDirection, waveHeight, wavePeriod, windDirection, windSpeed, precipitation } = sgData;
-    console.log(sgData)
+
     const suggestions = [];
 
     //Surf
