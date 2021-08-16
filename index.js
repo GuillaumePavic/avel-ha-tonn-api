@@ -11,7 +11,8 @@ app.use(express.json());
 
 app.use(router);
 
-app.listen(port, _ => {
+const server = app.listen(port, _ => {
    console.log(`Listening at port ${port}`);
 });
 
+module.exports = server;
