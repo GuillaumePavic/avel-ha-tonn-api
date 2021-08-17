@@ -1,11 +1,11 @@
-const fetchStormGlass = require('../models/stormGlassAPI');
+const StormGlassAPI = require('../models/stormGlassAPI');
 const calculAverage = require('../utils/calculAverage');
 const generateSuggestions = require('./generateSuggestions');
 const { formatTime } = require('../utils/date');
 
 
 async function generateData(lat, lng) {
-	let SGData = await fetchStormGlass(lat, lng);
+	let SGData = await StormGlassAPI.fetch(lat, lng);
 
 	for(hr in SGData) {
 		for(data in SGData[hr]) {

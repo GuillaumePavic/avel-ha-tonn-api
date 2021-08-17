@@ -1,6 +1,6 @@
 const generateData = require('../services/generateData');
 const roundLatLng = require('../utils/roundLatLng');
-const Markers = require('../models/markers');
+const Markers = require('../models/markerModel');
 
 exports.getMarkers = async (req, res) => {
     try {

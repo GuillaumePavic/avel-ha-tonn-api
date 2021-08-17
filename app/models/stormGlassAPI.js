@@ -1,24 +1,34 @@
 const fetch = require('node-fetch');
 const { getDate } = require('../utils/date');
 
-const fetchStormGlass = async (lat, lng) => {
-    const date = getDate();
+class StormGlassAPI {
+
+    hr0;
+    hr3;
+    hr6;
     
-    const params = 'airTemperature,waveHeight,waveDirection,wavePeriod,windDirection,windSpeed,precipitation,waterTemperature,cloudCover';
+    constructor(hr0, hr3, hr6) {
+        this.hr0 = hr0;
+        this.hr3 = hr3;
+        this.hr6 = hr6;
+    }
 
-    const response = await fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}&start=${date.start}&end=${date.end}`, {
-        headers: {
-            'Authorization': `${process.env.API_KEY}`
-        }
-    });
+    static fetch = async (lat, lng) => {
+        const date = getDate();
+        
+        const params = 'airTemperature,waveHeight,waveDirection,wavePeriod,windDirection,windSpeed,precipitation,waterTemperature,cloudCover';
 
-    const results = await response.json();
+        const response = await fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}&start=${date.start}&end=${date.end}`, {
+            headers: {
+                'Authorization': `${process.env.API_KEY}`
+            }
+        });
+    
+        const results = await response.json();
 
-    return {
-        hr0: results.hours[0], 
-        hr3: results.hours[3], 
-        hr6: results.hours[6]
+        return new this(results.hours[0], results.hours[3], results.hours[6]);
     };
-};
 
-module.exports = fetchStormGlass;
+}
+
+module.exports = StormGlassAPI;
