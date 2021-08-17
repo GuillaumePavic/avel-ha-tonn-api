@@ -1,16 +1,7 @@
 const fetch = require('node-fetch');
 const { getDate } = require('../utils/date');
-const markers = require('../../data/markers.json');
 
-exports.getMarkers = () => {
-    return markers;
-}
-
-exports.getMarker = (markerId) => {
-    return markers.find(e => e.id == markerId)
-}
-
-exports.fetchStormGlass = async (lat, lng) => {
+const fetchStormGlass = async (lat, lng) => {
     const date = getDate();
     
     const params = 'airTemperature,waveHeight,waveDirection,wavePeriod,windDirection,windSpeed,precipitation,waterTemperature,cloudCover';
@@ -30,3 +21,4 @@ exports.fetchStormGlass = async (lat, lng) => {
     };
 };
 
+module.exports = fetchStormGlass;

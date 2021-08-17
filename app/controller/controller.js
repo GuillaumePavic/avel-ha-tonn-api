@@ -1,10 +1,10 @@
 const generateData = require('../services/generateData');
 const roundLatLng = require('../utils/roundLatLng');
-const dataMapper = require('../dataMapper/dataMapper');
+const Markers = require('../models/markers');
 
-exports.getMarkers = (req, res) => {
+exports.getMarkers = async (req, res) => {
     try {
-        const markers = dataMapper.getMarkers();
+        const markers = await Markers.find({});
         res.json(markers);
     } catch (error) {
         console.log(error)
@@ -15,9 +15,9 @@ exports.getMarkers = (req, res) => {
 exports.getMarkerData = async (req, res) => {
     try {
         const markerId = req.params.id;
+ 
+        const marker = await Markers.findById(markerId).lean();
         
-        const marker = await dataMapper.getMarker(markerId);
-
         const data = await generateData(marker.lat, marker.lng);
 
         marker.data = data;

@@ -1,11 +1,11 @@
-const dataMapper = require('../dataMapper/dataMapper');
+const fetchStormGlass = require('../models/stormGlassAPI');
 const calculAverage = require('../utils/calculAverage');
 const generateSuggestions = require('./generateSuggestions');
 const { formatTime } = require('../utils/date');
 
 
 async function generateData(lat, lng) {
-	let SGData = await dataMapper.fetchStormGlass(lat, lng);
+	let SGData = await fetchStormGlass(lat, lng);
 
 	for(hr in SGData) {
 		for(data in SGData[hr]) {
