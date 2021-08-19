@@ -6,7 +6,7 @@ Les données météo sont fournies par l'API Storm Glass, qui permet d'obtenir l
 
 ## Stack Technique
 
- Node.JS, Express, node-fetch
+ Node.JS, Express, node-fetch, mongoDB, Mongoose
  
 Tests: Jest
 
