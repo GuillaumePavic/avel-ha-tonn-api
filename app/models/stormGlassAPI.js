@@ -20,7 +20,7 @@ class StormGlassAPI {
 
         const response = await fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}&start=${date.start}&end=${date.end}`, {
             headers: {
-                'Authorization': `${process.env.API_KEY}`
+                'Authorization': `${process.env.STORMGLASS_API_KEY}`
             }
         });
     

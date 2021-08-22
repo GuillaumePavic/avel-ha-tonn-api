@@ -1,10 +1,10 @@
 const generateData = require('../services/generateData');
 const roundLatLng = require('../utils/roundLatLng');
-const Markers = require('../models/markerModel');
+const Marker = require('../models/markerModel');
 
 exports.getMarkers = async (req, res) => {
     try {
-        const markers = await Markers.find({});
+        const markers = await Marker.find({});
         res.json(markers);
     } catch (error) {
         console.log(error)
@@ -14,10 +14,10 @@ exports.getMarkers = async (req, res) => {
 
 exports.getMarkerData = async (req, res) => {
     try {
-        const markerId = req.params.id;
- 
-        const marker = await Markers.findById(markerId).lean();
-        
+        let markerId = req.params.id;
+
+        const marker = await Marker.findById(markerId).lean();
+
         const data = await generateData(marker.lat, marker.lng);
 
         marker.data = data;

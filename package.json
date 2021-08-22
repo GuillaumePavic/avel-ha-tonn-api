@@ -1,4 +1,12 @@
 {
+  "name": "test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^27.0.6",
+    "supertest": "^6.1.5"
+  },
   "dependencies": {
     "@mongoosejs/double": "^0.2.0",
     "cors": "^2.8.5",
@@ -9,16 +17,10 @@
     "mongoose": "^5.13.7",
     "node-fetch": "^2.6.1"
   },
-  "name": "test",
-  "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {
-    "jest": "^27.0.6",
-    "supertest": "^6.1.5"
-  },
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --watchAll --verbose"
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=test jest --runInBand --verbose"
   },
   "keywords": [],
   "author": "",
