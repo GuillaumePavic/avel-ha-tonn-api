@@ -1,4 +1,4 @@
-const searchController = require('../controller/search');
+const searchController = require('../controllers/search');
 const express = require('express');
 const router = express.Router();
 

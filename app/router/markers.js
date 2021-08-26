@@ -1,5 +1,4 @@
-
-const markersController = require('../controller/markers');
+const markersController = require('../controllers/markers');
 const express = require('express');
 const router = express.Router();
 
