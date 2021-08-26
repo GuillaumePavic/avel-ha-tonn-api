@@ -4,11 +4,11 @@ function generateSuggestions(sgData) {
     const suggestions = [];
 
     //Surf
-    const wvHeight = (waveHeight >= 0.5);
-    const wvDir = (waveDirection >= 180 && waveDirection <= 300);
-    const wvPeriod = (wavePeriod > 6);
-    const windDir = ((windDirection > 120 && windDirection < 320) && windSpeed > 8);
-    if(wvHeight && wvDir && wvPeriod && !windDir) suggestions.push({id: 1, text: "Surf"});
+    const waveHeightOk = (waveHeight >= 0.5);
+    const waveDirectionOk = (waveDirection >= 180 && waveDirection <= 300);
+    const wavePeriodOk = (wavePeriod > 6);
+    const windDirectionOk = ((windDirection > 120 && windDirection < 320) && windSpeed > 8);
+    if(waveHeightOk && waveDirectionOk && wavePeriodOk && !windDirectionOk) suggestions.push({id: 1, text: "Surf"});
 
     //Beach
     if(airTemperature >= 18 && waterTemperature >= 17 && !precipitation) {

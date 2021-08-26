@@ -1,5 +1,4 @@
 require('dotenv').config();
-const router = require('./app/router/router');
 const cors = require('cors');
 const express = require('express');
 const app = express();
@@ -10,7 +9,7 @@ require('./app/config/dbconnect')();
 
 app.use(cors());
 app.use(express.json());
-app.use(router);
+require('./app/router/index')(app);
 
 const server = app.listen(port, _ => {
    console.log(`Listening at port ${port}`);
