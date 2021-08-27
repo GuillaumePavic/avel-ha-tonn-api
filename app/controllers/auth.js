@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
         //Check mail
         const user = await User.findOne({mail: loginData.mail});
         if(!user) return res.status(400).json({message: 'email ou mot de passe invalide'});
-    console.log(user)
+
         //Check password
         const match = await bcrypt.compare(loginData.password, user.password);
         if(!match) return res.status(400).json({message: 'email ou mot de passe invalide'});

@@ -1,5 +1,5 @@
 const generateData = require('../services/generateData');
-const Marker = require('../models/markerModel');
+const {Marker} = require('../models/markerModel');
 
 exports.getMarkers = async (req, res) => {
     try {
