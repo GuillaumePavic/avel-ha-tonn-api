@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 exports.createUser = async (req, res) => {
     try {
         const userData = req.body;
-        console.log(userData);
         //JOI
     
         //USER MODEL
@@ -17,5 +16,18 @@ exports.createUser = async (req, res) => {
         res.json({message: 'success'});
     } catch (error) {
         console.log(error);
+        res.status(500).json({message: 'erreur serveur'});
+    }
+}
+
+exports.getUser = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await User.findById(userId).select(['name', 'mail', 'createdAt', 'markers','-_id']);
+
+        res.json(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: 'erreur serveur'});
     }
 }

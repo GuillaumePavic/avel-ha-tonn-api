@@ -19,10 +19,9 @@ module.exports = async (req, res) => {
         const payload = {id: user.id};
         const token = jwt.sign(payload, process.env.JWTPRIVATEKEY, { expiresIn: '1h' });
     
-        res.cookie('auth', token, { maxAge: 900000, httpOnly: true });
-        res.json({name: user.name});
+        res.json({name: user.name, token});
     } catch (error) {
         console.log(error);
-        res.status(500).json({message: 'error server'});
+        res.status(500).json({message: 'erreur serveur'});
     }
 }

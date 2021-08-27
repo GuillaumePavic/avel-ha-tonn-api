@@ -1,6 +1,6 @@
 const markersRouter = require('./markers');
 const searchRouter = require('./search');
-const usersRouter = require('./users.js');
+const usersRouter = require('./users');
 const authRouter = require('./auth');
 
 module.exports = (app) => {

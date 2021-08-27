@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Double = require('@mongoosejs/double');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -14,6 +15,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    markers: [Double],
     createdAt : {
         type: Date,
         default: Date.now
