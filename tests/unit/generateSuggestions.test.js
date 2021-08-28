@@ -17,8 +17,13 @@ describe('generateSuggestions.js', () => {
         };
 
         const suggestions = generateSuggestions(mockData);
-        const expectedResult = suggestions.some(suggestion => suggestion === 'Surf' || 'Plage' || 'Voile' || 'Pas grand chose à faire à la plage');
 
+        const suggestionsText = [];
+        for(let suggestion of suggestions) {
+            suggestionsText.push(suggestion.text);
+        }
+        
+        const expectedResult = suggestionsText.includes('Surf') || suggestionsText.includes('Plage') || suggestionsText.includes('Voile') || suggestionsText.includes('Pas grand chose à faire à la plage');
         expect(expectedResult).toBe(true);
     });
 });

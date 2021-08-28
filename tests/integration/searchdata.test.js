@@ -4,11 +4,11 @@ let server;
 
 describe('searchData route', () => {
     
-    beforeEach(() => {
+    beforeAll(() => {
         server = require('../../index');
     });
     
-    afterEach(() => server.close());
+    afterAll(() => server.close());
 
     describe('GET /search', () => {
 
@@ -20,10 +20,9 @@ describe('searchData route', () => {
             expect(res.status).toBe(200);
             expect(typeof res.body).toBe('object');
 
-            /* expect(res.body).toHaveProperty('id');
             expect(res.body).toHaveProperty('lat');
             expect(res.body).toHaveProperty('lng');
-            expect(res.body).toHaveProperty('label'); */
+            expect(res.body).toHaveProperty('data');
         });
     });
 });
