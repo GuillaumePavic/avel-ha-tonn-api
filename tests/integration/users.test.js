@@ -8,7 +8,7 @@ describe('users routes', () => {
 
     const userData = {
         name: 'User',
-        mail: 'user@mail.com',
+        email: 'user@mail.com',
         password: 'password'
     }
 
@@ -37,14 +37,14 @@ describe('users routes', () => {
     describe("GET /user", () => {
         
         it("should return an object with the right properties", async () => {
-            const authResponse = await request(server).post('/auth').send({mail: 'user@mail.com', password: 'password'});
+            const authResponse = await request(server).post('/auth').send({email: 'user@mail.com', password: 'password'});
             token = authResponse.body.token;
             
             const res = await request(server).get('/user').set('auth', token);
 
             expect(res.status).toBe(200);
             expect(res.body).toHaveProperty('name', 'User');
-            expect(res.body).toHaveProperty('mail', 'user@mail.com');
+            expect(res.body).toHaveProperty('email', 'user@mail.com');
             expect(res.body).toHaveProperty('createdAt');
             expect(res.body).toHaveProperty('markers', []);
         });

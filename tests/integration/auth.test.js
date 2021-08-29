@@ -13,7 +13,7 @@ describe('authentification route', () => {
 
         const userData = {
             name: 'User',
-            mail: 'user@mail.com',
+            email: 'user@mail.com',
             password: 'password',
             markers: []
         }
@@ -30,7 +30,7 @@ describe('authentification route', () => {
 
     it('should return the user\'s name and a token', async () => {
 
-        const res = await request(server).post(`/auth`).send({mail: 'user@mail.com', password: 'password'});
+        const res = await request(server).post(`/auth`).send({email: 'user@mail.com', password: 'password'});
 
         expect(res.status).toEqual(200);
         expect(res.body).toHaveProperty('name');

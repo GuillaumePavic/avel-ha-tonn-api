@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const userValidation = require('../validation/user');
 const bcrypt = require('bcrypt');
 
 exports.createUser = async (req, res) => {
@@ -6,6 +7,11 @@ exports.createUser = async (req, res) => {
         const userData = req.body;
 
         //JOI
+        try {
+            await userValidation.validateAsync(userData);
+        } catch (error) {
+            return res.status(400).send(error.details[0].message); 
+        }
 
         //save user
         const newUser = new User(userData);
@@ -26,10 +32,8 @@ exports.createUser = async (req, res) => {
 exports.getUser = async (req, res) => {
     try {
         const userId = req.user.id;
-        
-        //JOI
 
-        const user = await User.findById(userId).select(['name', 'mail', 'createdAt', 'markers','-_id']);
+        const user = await User.findById(userId).select(['name', 'email', 'createdAt', 'markers','-_id']);
 
         if(!user) return res.status(404).json({message: 'la ressource demandée n\'existe pas'});
 
@@ -73,10 +77,10 @@ exports.updateUser = async (req, res) => {
             const validPassword = bcrypt.compareSync(data.password, user.password);
         }
         //name
-        //mail
-        if(data.mail) {
-            const user = await User.findOne({mail: data.mail});
-            if(user) return res.status(409).json({message: 'cette addresse mail est déjà utilisé'});
+        //email
+        if(data.email) {
+            const user = await User.findOne({email: data.email});
+            if(user) return res.status(409).json({message: 'cet email est déjà utilisé'});
         }
 
         //markers    
