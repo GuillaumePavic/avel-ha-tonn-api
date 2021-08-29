@@ -10,7 +10,7 @@ exports.createUser = async (req, res) => {
         try {
             await userValidation.validateAsync(userData);
         } catch (error) {
-            return res.status(400).send(error.details[0].message); 
+            return res.status(400).send({message: error.details[0].message}); 
         }
 
         //save user

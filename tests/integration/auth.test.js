@@ -28,6 +28,7 @@ describe('authentification route', () => {
     
     afterAll(() => server.close());
 
+    //happy path
     it('should return the user\'s name and a token', async () => {
 
         const res = await request(server).post(`/auth`).send({email: 'user@mail.com', password: 'password'});
@@ -36,5 +37,20 @@ describe('authentification route', () => {
         expect(res.body).toHaveProperty('name');
         expect(res.body.name).toBe('User');
         expect(res.body).toHaveProperty('token');
-    })
-})
+    });
+
+    //negative tests
+    it('should return that the email is required', async () => {
+        const res = await request(server).post(`/auth`).send({password: 'password'});
+
+        expect(res.status).toEqual(400);
+        expect(res.body).toHaveProperty('message', "\"email\" is required");
+    });
+
+    it('should return that the password is required', async () => {
+        const res = await request(server).post(`/auth`).send({email: 'user@mail.com'});
+
+        expect(res.status).toEqual(400);
+        expect(res.body).toHaveProperty('message', "\"password\" is required");
+    });
+});

@@ -30,7 +30,27 @@ describe('users routes', () => {
             expect(res.body).toHaveProperty('message', 'success');
         });
 
-        //negative test a faire quand JOI implémenté
+        //negative tests
+        it("should return that the name is missing", async () => {
+            const res = await request(server).post('/user').send({email: 'user@mail.com', password: 'password'});
+
+            expect(res.status).toBe(400);
+            expect(res.body).toHaveProperty('message', "\"name\" is required");
+        });
+
+        it("should return that the email is missing", async () => {
+            const res = await request(server).post('/user').send({name: "User", password: 'password'});
+
+            expect(res.status).toBe(400);
+            expect(res.body).toHaveProperty('message', "\"email\" is required");
+        });
+
+        it("should return that the password is missing", async () => {
+            const res = await request(server).post('/user').send({name: "User", email: 'user@mail.com'});
+
+            expect(res.status).toBe(400);
+            expect(res.body).toHaveProperty('message', "\"password\" is required");
+        });
         
     });
 

@@ -6,13 +6,14 @@ const jwt = require('jsonwebtoken');
 module.exports = async (req, res) => {
     try {
         const loginData = req.body;
+
         //JOI
         try {
             await authValidation.validateAsync(loginData);
         } catch (error) {
-            return res.status(400).send(error.details[0].message);        
+            return res.status(400).send({message: error.details[0].message});        
         }
-    
+
         //Check mail
         const user = await User.findOne({mail: loginData.mail});
         if(!user) return res.status(400).json({message: 'email ou mot de passe invalide'});
