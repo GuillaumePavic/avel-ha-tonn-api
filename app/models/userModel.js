@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
             },
             message: props => `${props.value} is not a valid email!`
         },
+        unique: true,
         required: true,
     },
     password: {
@@ -34,6 +35,10 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     markers: [markerSchema],
+    active: {
+        type: Boolean,
+        default: false
+    },
     createdAt : {
         type: Date,
         default: Date.now

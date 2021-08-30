@@ -1,5 +1,7 @@
 const User = require('../models/userModel');
 const userValidation = require('../validation/user');
+const sendVerificationEmail = require('../utils/sendVerificationEmail');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 exports.createUser = async (req, res) => {
@@ -13,6 +15,10 @@ exports.createUser = async (req, res) => {
             return res.status(400).send({message: error.details[0].message}); 
         }
 
+        //check if email is not already used
+        const emailAlreadyUsed = await User.findOne({email: userData.email});
+        if(emailAlreadyUsed) return res.status(409).json({message: 'cet email est déjà utilisé'});
+
         //save user
         const newUser = new User(userData);
 
@@ -20,9 +26,14 @@ exports.createUser = async (req, res) => {
         newUser.password = await bcrypt.hash(newUser.password, salt);
 
         await newUser.save();
+
+        //email verification
+        const payload = {id: newUser._id};
+        const token = jwt.sign(payload, process.env.JWTPRIVATEKEY, { expiresIn: '10m' });
+        await sendVerificationEmail(newUser.email ,token);
     
         //res
-        res.json({message: 'success'});
+        res.json({message: 'Veuillez vérifier vos emails afin de finaliser la création de votre compte'});
     } catch (error) {
         console.log(error);
         res.status(500).json({message: 'erreur serveur'});

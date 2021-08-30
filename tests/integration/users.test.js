@@ -27,7 +27,7 @@ describe('users routes', () => {
             const res = await request(server).post(`/user`).send(userData);
 
             expect(res.status).toBe(200);
-            expect(res.body).toHaveProperty('message', 'success');
+            expect(res.body).toHaveProperty('message', 'Veuillez vérifier vos emails afin de finaliser la création de votre compte');
         });
 
         //negative tests
