@@ -12,7 +12,7 @@ const markerSchema = new mongoose.Schema({
         },
         label: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         }
 });
