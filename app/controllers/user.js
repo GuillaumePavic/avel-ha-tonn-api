@@ -15,11 +15,9 @@ exports.createUser = async (req, res) => {
             return res.status(400).send({message: error.details[0].message}); 
         }
 
-        //check if email is not already used
-        if(process.env.NODE_ENV === 'production') {
+        //check if email is already used
             const emailAlreadyUsed = await User.findOne({email: userData.email});
             if(emailAlreadyUsed) return res.status(409).json({message: 'cet email est déjà utilisé'});
-        }
 
         //save user
         const newUser = new User(userData);
