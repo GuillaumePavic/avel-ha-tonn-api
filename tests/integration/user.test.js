@@ -12,9 +12,9 @@ describe('users routes', () => {
         password: 'password'
     }
 
-    beforeAll(() => {
+    beforeAll(async () => {
         server = require('../../index');
-        User.deleteMany({});
+        await User.deleteMany({});
     });
 
     afterAll(() => {
@@ -68,6 +68,14 @@ describe('users routes', () => {
             expect(res.body).toHaveProperty('createdAt');
             expect(res.body).toHaveProperty('markers', []);
         });
+
+        //negative tests
+        it("should return that the token is required", async () => {
+            const res = await request(server).get('/user');
+
+            expect(res.status).toBe(401);
+            expect(res.body).toHaveProperty('message', 'Accès refusé');
+        });
     });
 
     describe("DELETE /user", () => {
@@ -77,6 +85,14 @@ describe('users routes', () => {
 
             expect(res.status).toBe(200);
             expect(res.body).toHaveProperty('message', 'le compte a été supprimé');
-        })
+        });
+
+        //negative tests
+        it("should return that the token is required", async () => {
+            const res = await request(server).get('/user');
+
+            expect(res.status).toBe(401);
+            expect(res.body).toHaveProperty('message', 'Accès refusé');
+        });
     })
 });

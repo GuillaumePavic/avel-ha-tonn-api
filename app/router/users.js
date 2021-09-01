@@ -1,11 +1,11 @@
-const usersController = require('../controllers/users');
+const userController = require('../controllers/user');
 const authMiddleware = require('../middlewares/auth');
 const express = require('express');
 const router = express.Router();
 
-router.post('/', usersController.createUser);
-router.get('/', authMiddleware, usersController.getUser);
-router.post('/marker', authMiddleware, usersController.saveMarker);
-router.delete('/', authMiddleware, usersController.deleteUser);
+router.post('/', userController.createUser);
+router.get('/', authMiddleware, userController.getUser);
+router.post('/marker', authMiddleware, userController.saveMarker);
+router.delete('/', authMiddleware, userController.deleteUser);
 
 module.exports = router;

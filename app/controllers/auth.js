@@ -15,7 +15,7 @@ exports.logIn = async (req, res) => {
         }
 
         //Check mail
-        const user = await User.findOne({mail: loginData.mail});
+        const user = await User.findOne({email: loginData.email});
         if(!user) return res.status(400).json({message: 'email ou mot de passe invalide'});
 
         //Check password
@@ -23,12 +23,14 @@ exports.logIn = async (req, res) => {
         if(!match) return res.status(400).json({message: 'email ou mot de passe invalide'});
 
         //check if user's email has been verified
-        if(user.active === false) return res.status(401).json({message: 'Veuillez valider votre adresse mail'});       
+        if(process.env.NODE_ENV === 'production') {
+            if(user.active === false) return res.status(401).json({message: 'Veuillez valider votre adresse mail'});       
+        }
     
         //JWT
         const payload = {id: user._id};
-        const token = jwt.sign(payload, process.env.JWTPRIVATEKEY, { expiresIn: '10m' });
-    
+        const token = jwt.sign(payload, process.env.JWTPRIVATEKEY, { expiresIn: '1h' });
+
         res.json({name: user.name, token});
     } catch (error) {
         console.log(error);
@@ -55,7 +57,7 @@ exports.confirmEmail = async (req, res) => {
         if(!user) return res.status(404).json({message: 'la ressource demandée n\'existe pas'});
 
         const REDIRECT_URL = process.env.NODE_ENV === 'production' ? 'https://avelhatonn.herokuapp.com/' : 'http://localhost:3000/';
-        res.redirect(REDIRECT_URL + 'emailConfirm');
+        res.redirect(REDIRECT_URL + 'confirmEmail');
     } catch (error) {
         console.log(error);
         res.status(500).json({message: 'erreur serveur'});

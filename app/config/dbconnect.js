@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
-const DB_URI = process.env.NODE_ENV === 'test' ? process.env.TEST_MONGO_URI : process.env.MONGO_URI;
+let DB_URI;
+if(process.env.NODE_ENV === 'test') DB_URI = process.env.TEST_MONGO_URI_LOCAL;
+if(process.env.NODE_ENV === 'development') DB_URI = process.env.MONGO_URI_LOCAL;
+if(process.env.NODE_ENV === 'production') DB_URI = process.env.MONGODB_ATLAS;
 
 module.exports = function() {
     mongoose.connect(DB_URI, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })

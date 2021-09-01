@@ -16,8 +16,10 @@ exports.createUser = async (req, res) => {
         }
 
         //check if email is not already used
-        const emailAlreadyUsed = await User.findOne({email: userData.email});
-        if(emailAlreadyUsed) return res.status(409).json({message: 'cet email est déjà utilisé'});
+        if(process.env.NODE_ENV === 'production') {
+            const emailAlreadyUsed = await User.findOne({email: userData.email});
+            if(emailAlreadyUsed) return res.status(409).json({message: 'cet email est déjà utilisé'});
+        }
 
         //save user
         const newUser = new User(userData);
@@ -29,9 +31,9 @@ exports.createUser = async (req, res) => {
 
         //email verification
         const payload = {id: newUser._id};
-        const token = jwt.sign(payload, process.env.JWTPRIVATEKEY, { expiresIn: '10m' });
+        const token = jwt.sign(payload, process.env.JWTPRIVATEKEY, { expiresIn: '1h' });
         await sendVerificationEmail(newUser.email ,token);
-    
+
         //res
         res.json({message: 'Veuillez vérifier vos emails afin de finaliser la création de votre compte'});
     } catch (error) {
@@ -61,7 +63,7 @@ exports.saveMarker = async (req, res) => {
 
         const userId = req.user.id;
 
-        const user = await User.findByIdAndUpdate(userId, { $push: { markers: newMarker } })
+        const user = await User.findByIdAndUpdate(userId, { $push: { markers: newMarker } });
         if(!user) return res.status(404).json({message: 'la ressource demandée n\'existe pas'});
         
         res.json({message: 'marker sauvegardé'});
@@ -82,21 +84,29 @@ exports.updateUser = async (req, res) => {
         const user = await User.findById(userId).lean();
         if(!user) return res.status(404).json({message: 'la ressource demandée n\'existe pas'});
         
-        //password
-        if(data.password) {
-            //first verify old password
-            const validPassword = bcrypt.compareSync(data.password, user.password);
-        }
-        //name
         //email
         if(data.email) {
             const user = await User.findOne({email: data.email});
             if(user) return res.status(409).json({message: 'cet email est déjà utilisé'});
         }
 
-        //markers    
-        
+        //password
+        if(data.password) {
+            //first verify old password
+            const validPassword = bcrypt.compareSync(data.password, user.password);
+            if(!validPassword) return res.status(400).json({message: 'mot de passe invalide'});
 
+            //replace password
+            const salt = await bcrypt.genSalt(10);
+            data.password = await bcrypt.hash(data.password, salt);
+        }
+
+        //markers    
+        if(data.markers) {
+            await User.findByIdAndUpdate(userId, { $push: { markers: newMarker } });
+            const markers = await User.findById(userId).select('markers');
+        }
+        
         const updatedUser = {
             ...user,
             ...req.body
