@@ -9,18 +9,23 @@
   },
   "dependencies": {
     "@mongoosejs/double": "^0.2.0",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dayjs": "^1.10.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.13.7",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "nodemailer": "^6.6.3"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest --runInBand --verbose"
+    "test": "cross-env NODE_ENV=test jest --runInBand --verbose",
+    "seeding": "cross-env NODE_ENV=production node data/importData.js" 
   },
   "keywords": [],
   "author": "",

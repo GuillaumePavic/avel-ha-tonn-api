@@ -1,5 +1,6 @@
-const Marker = require('../../app/models/markerModel');
+const { Marker } = require('../../app/models/markerModel');
 const request = require('supertest');
+const mongoose = require('mongoose');
 
 let server;
 
@@ -25,39 +26,42 @@ describe('markers routes', () => {
     ];
 
     //Init
-    beforeEach(async () => {
+    beforeAll(async () => {
         server = require('../../index');
         await Marker.deleteMany({});
         await Marker.insertMany(markers);
     });
     
-    afterEach(() => server.close());
+    afterAll(() => {
+        mongoose.connection.close();
+        server.close();
+    });
 
     //Testing
     describe('GET /markers', () => {
-        it('should respond with status 200 and an array of objects', async () => {
+        it('should respond with status 200 and an array of 3 objects', async () => {
             const res = await request(server).get('/markers');
 
             expect(res.status).toBe(200);
-            expect(res.body.length).toBeGreaterThan(0);
+            expect(res.body.length).toEqual(3);
         });
     });
 
-    describe('GET /marker/:id', () => {
+    describe('GET /markers/:id', () => {
         it('should respond with status 200 and an object with given properties', async () => {
-            const markers = await request(server).get('/markers');
-            expect(markers.body.length).toBeGreaterThan(0);
-            const markerOne = markers[0];
+            const markersList = await request(server).get('/markers');
+            const markerOne = {...markersList.body[0]};
 
-            const res = await request(server).get(`/marker/${markerOne}`);
+            const res = await request(server).get(`/markers/${markerOne._id}`);
 
             expect(res.status).toBe(200);
             expect(typeof res.body).toBe('object');
 
-            expect(res.body).toHaveProperty('id');
+            expect(res.body).toHaveProperty('_id');
             expect(res.body).toHaveProperty('lat');
             expect(res.body).toHaveProperty('lng');
             expect(res.body).toHaveProperty('label');
+            expect(res.body).toHaveProperty('data');
         });
     });
 });

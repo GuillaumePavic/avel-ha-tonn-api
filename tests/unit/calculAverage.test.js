@@ -11,6 +11,6 @@ describe('calculAverage.js', () => {
 
         const result = calculAverage(mockItem);
 
-        expect(typeof result).toBe('number');
+        expect(result).toEqual(21.23);
     });
 });

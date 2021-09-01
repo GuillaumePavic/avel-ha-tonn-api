@@ -12,11 +12,11 @@ const markerSchema = new mongoose.Schema({
         },
         label: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         }
 });
 
 const Marker = mongoose.model('Marker', markerSchema);
 
-module.exports = Marker;
+module.exports = {Marker, markerSchema};
