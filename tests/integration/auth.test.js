@@ -1,6 +1,7 @@
 const User = require('../../app/models/userModel');
 const bcrypt = require('bcrypt');
 const request = require('supertest');
+const mongoose = require('mongoose');
 
 let server;
 
@@ -26,7 +27,10 @@ describe('authentification route', () => {
         await user.save();
     });
     
-    afterAll(() => server.close());
+    afterAll(() => {
+        mongoose.connection.close();
+        server.close();
+    });
 
     //happy path
     it('should return the user\'s name and a token', async () => {

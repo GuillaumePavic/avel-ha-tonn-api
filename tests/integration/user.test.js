@@ -1,5 +1,6 @@
 const request = require('supertest');
 const User = require('../../app/models/userModel');
+const mongoose = require('mongoose');
 
 let server;
 let token;
@@ -18,6 +19,7 @@ describe('users routes', () => {
     });
 
     afterAll(() => {
+        mongoose.connection.close();
         server.close();
     });
 

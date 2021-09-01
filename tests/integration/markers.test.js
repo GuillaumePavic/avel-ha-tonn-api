@@ -1,5 +1,6 @@
 const { Marker } = require('../../app/models/markerModel');
 const request = require('supertest');
+const mongoose = require('mongoose');
 
 let server;
 
@@ -31,7 +32,10 @@ describe('markers routes', () => {
         await Marker.insertMany(markers);
     });
     
-    afterAll(() => server.close());
+    afterAll(() => {
+        mongoose.connection.close();
+        server.close();
+    });
 
     //Testing
     describe('GET /markers', () => {

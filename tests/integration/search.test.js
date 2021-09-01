@@ -1,4 +1,5 @@
 const request = require('supertest');
+const mongoose = require('mongoose');
 
 let server;
 
@@ -8,7 +9,10 @@ describe('searchData route', () => {
         server = require('../../index');
     });
     
-    afterAll(() => server.close());
+    afterAll(() => {
+        mongoose.connection.close();
+        server.close();
+    });
 
     describe('GET /search', () => {
 
