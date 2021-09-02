@@ -9,6 +9,6 @@ module.exports = (app) => {
     app.use('/user', usersRouter);
     app.use('/auth', authRouter);
     app.use((req, res) => {
-        res.status(404).json({message: 'la ressource demandée n\'existe pas'});
+        res.status(404).json({message: 'err 404, la ressource demandée n\'existe pas'});
     })
 }

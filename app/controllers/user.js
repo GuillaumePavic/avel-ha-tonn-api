@@ -79,7 +79,7 @@ exports.updateUser = async (req, res) => {
         //JOI
 
         //verify if user exists
-        const user = await User.findById(userId).lean();
+        let user = await User.findById(userId).lean();
         if(!user) return res.status(404).json({message: 'la ressource demandée n\'existe pas'});
         
         //email
@@ -109,6 +109,10 @@ exports.updateUser = async (req, res) => {
             ...user,
             ...req.body
         }
+
+        user = await User.findByIdAndUpdate(userId, {...updatedUser});
+
+        res.json({user, message: "Modification effectué"});
         
     } catch (error) {
         console.log(error);
