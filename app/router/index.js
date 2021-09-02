@@ -8,5 +8,7 @@ module.exports = (app) => {
     app.use('/search', searchRouter);
     app.use('/user', usersRouter);
     app.use('/auth', authRouter);
-    //app.use(404)
+    app.use((req, res) => {
+        res.status(404).json({message: 'la ressource demandée n\'existe pas'});
+    })
 }
