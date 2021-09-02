@@ -1,6 +1,6 @@
 const createTransporter = require('./transporter');
 
-const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://avelhatonn-api.herokuapp.com/' : 'http://localhost:5000';
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://avelhatonn-api.herokuapp.com' : 'http://localhost:5000';
 
 async function sendVerificationEmail(userEmail, token) {
   const transporter = createTransporter();
