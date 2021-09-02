@@ -86,7 +86,7 @@ exports.sendMailToResetPwd = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
     try {
-        const token = req.headers.auth;
+        const token = req.headers.authorization;
         let newPassword = req.body.password;
 
         let userId;

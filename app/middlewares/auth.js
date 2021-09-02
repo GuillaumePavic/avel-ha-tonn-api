@@ -5,7 +5,7 @@ const User = require('../models/userModel');
 module.exports = async (req, res, next) => {
     try {
         //verify if a token is provided
-        const token = req.headers.auth;
+        const token = req.headers.authorization;
         if(!token) return res.status(401).json({message: 'Accès refusé'});
 
         //verify if the token is valid
