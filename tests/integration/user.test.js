@@ -62,7 +62,7 @@ describe('users routes', () => {
             const authResponse = await request(server).post('/auth').send({email: 'user@mail.com', password: 'password'});
             token = authResponse.body.token;
             
-            const res = await request(server).get('/user').set('auth', token);
+            const res = await request(server).get('/user').set('authorization', token);
 
             expect(res.status).toBe(200);
             expect(res.body).toHaveProperty('name', 'User');
@@ -83,7 +83,7 @@ describe('users routes', () => {
     describe("DELETE /user", () => {
 
         it("should return that the account has been deleted", async () => {
-            const res = await request(server).delete('/user').set('auth', token);
+            const res = await request(server).delete('/user').set('authorization', token);
 
             expect(res.status).toBe(200);
             expect(res.body).toHaveProperty('message', 'le compte a été supprimé');
