@@ -10,10 +10,4 @@ Les données météo sont fournies par l'API Storm Glass, qui permet d'obtenir l
  
 Tests: Jest
 
-## Demo
-
-Le lien vers l'application => https://avelhatonn.herokuapp.com/
-
-NB. L'application étant herbergée avec l'offre gratuite d'Heroku, son chargement complet peut prendre plusieurs secondes si le serveur était en veille.
-
 ![avel](https://user-images.githubusercontent.com/76964122/129081783-f78b50f4-6a59-41a4-9ccc-c0dc2352c0a0.png)
